@@ -1,10 +1,23 @@
 --South Africa Criminal Database - 30 SQL Questions (Questions Only) 
+--TABLE [Police_Case].[dbo].[south_africa_criminal_database]
 
 --1. Display all records from the CriminalCases table. 
 
+SELECT * FROM [Police_Case].[dbo].[south_africa_criminal_database]
+
 --2. Count the total number of cases in the table. 
 
+SELECT COUNT (*) AS Total_Number_of_Cases FROM [Police_Case].[dbo].[south_africa_criminal_database]
+
 --3. Count the number of cases in each province. 
+
+SELECT ([Province]),
+
+COUNT ([CaseNumber]) AS No_of_Cases_in_each_province
+FROM [Police_Case].[dbo].[south_africa_criminal_database]
+GROUP BY [Province]
+
+
 
 --4. Retrieve all cases where the crime type is Fraud. 
 
