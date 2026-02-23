@@ -72,7 +72,6 @@ COUNT(CASE WHEN Arrested = 'YES' THEN 1 END) AS suspects_arrested,
 COUNT(CASE WHEN Arrested = 'NO' THEN 1 END) AS suspects_not_arrested
 FROM [Police_Case].[dbo].[south_africa_criminal_database];
 
-
 --12. Count the number of cases associated with each bank. 
 
 SELECT [BankInvolved],
@@ -99,17 +98,45 @@ ORDER BY Age ASC;
 
 --15. Calculate the average age of suspects per province. 
 
-
+SELECT [Province],
+AVG([Age]) AS Average_age_of_suspects
+FROM [Police_Case].[dbo].[south_africa_criminal_database]
+WHERE [Age] IS NOT NULL
+GROUP BY [Province]
+ORDER BY Average_age_of_suspects DESC;
 
 --16. Display all cases recorded from 2020 onwards. 
 
+SELECT *
+FROM [Police_Case].[dbo].[south_africa_criminal_database]
+WHERE CrimeDate >= '2020-01-01'
+ORDER BY CrimeDate ASC;
+
 --17. Count how many cases resulted in a Convicted status. 
+
+SELECT COUNT(*) AS convicted_status
+FROM [Police_Case].[dbo].[south_africa_criminal_database]
+WHERE CaseStatus = 'Convicted';
 
 --18. Retrieve all suspects with more than three previous offenses. 
 
+SELECT *
+FROM [Police_Case].[dbo].[south_africa_criminal_database]
+WHERE PreviousOffenses >= 3
+ORDER BY PreviousOffenses DESC;
+
 --19. Show the distribution of cases by Risk Level. 
 
+SELECT RiskLevel,
+COUNT (*) AS distribution_of_cases_by_risk_level
+FROM [Police_Case].[dbo].[south_africa_criminal_database]
+GROUP BY RiskLevel
+ORDER BY RiskLevel DESC;
+
 --20. Calculate the total Estimated Fraud Amount across all cases. 
+
+SELECT SUM(CAST([EstimatedFraudAmount_ZAR] AS BIGINT)) AS total_Estimated_Fraud_aount
+FROM [Police_Case].[dbo].[south_africa_criminal_database];
 
 --21. Identify the province with the highest number of cases. 
 
