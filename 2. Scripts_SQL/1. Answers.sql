@@ -14,7 +14,6 @@ FROM [Police_Case].[dbo].[south_africa_criminal_database];
 --3. Count the number of cases in each province. 
 
 SELECT ([Province]),
-
 COUNT ([CaseNumber]) AS No_of_Cases_in_each_province
 FROM [Police_Case].[dbo].[south_africa_criminal_database]
 GROUP BY [Province];
@@ -48,10 +47,23 @@ FROM [Police_Case].[dbo].[south_africa_criminal_database]
 
 --8. Find the highest Estimated Fraud Amount recorded. 
 
+SELECT MAX ([EstimatedFraudAmount_ZAR]) AS Highest_estimated_fraud_amoount
+FROM [Police_Case].[dbo].[south_africa_criminal_database];
 
 --9. Retrieve the top 10 cases with the highest Estimated Fraud Amount. 
 
+SELECT TOP 10
+[RecordID],
+[EstimatedFraudAmount_ZAR]
+FROM [Police_Case].[dbo].[south_africa_criminal_database]
+WHERE [EstimatedFraudAmount_ZAR] IS NOT NULL
+ORDER BY [EstimatedFraudAmount_ZAR] DESC;
+
 --10. Display all cases where the suspect was arrested. 
+
+SELECT * 
+FROM [Police_Case].[dbo].[south_africa_criminal_database]
+WHERE [Arrested] = 'YES';
 
 --11. Count how many suspects were arrested versus not arrested. 
 
